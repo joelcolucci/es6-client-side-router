@@ -26,7 +26,23 @@ yarn gulp demo
 
 ## Documentation
 ### Design Decisions
-Coming soon..
+A client-side routers primary responsbility is to:
+* Intercept navigation actions
+* Provide a hook to complete an alternative action
+
+#### What does this library define a navigation action?
+ This library defines a navigation action is:
+* A click on an anchor element*
+* Manipulation of browser history controls (Back, Forward button)
+
+##### *Clicks on anchor elements are filtered down by the following criteria:
+* Click is not modified (Control + click)
+* Click is a left click
+* Anchor does not contain "target" attribute
+* Anchor does not contain "download" attribute
+* Anchor contains a "href" attribute
+* Anchor HREF is not to a different domain
+* Anchor HREF is not to an email address (mailto: link)
 
 ### Router Class
 
