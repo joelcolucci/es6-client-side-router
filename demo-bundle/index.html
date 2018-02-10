@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ROUTER</title>
+    <style>
+      a {
+        display: block;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="/">Link to root path "/"</a>
+    <a href="/about">Link to relative page "About"</a>
+    <a href="/contact">Link to relative page "Contact"</a>
+
+    <a href="/careers">
+      <h1>H1 wrapped by link to relative page "Careers"</h1>
+    </a>
+ 
+    <a href="https://www.google.com" target="_blank">Link set to target _blank - Google</a>
+    <a href="mailto:example@test.com">mailto link</a>
+
+    
+    <main class="main">
+      
+    </main>
+    <script src="/assets/router.bundle.js"></script>
+    <script>
+      let router = new window.Router();
+
+      router.route('/:id', (ctx) => {
+        let main = document.querySelector('main');
+
+        let elem = document.createElement('h1');
+        elem.textContent = `Im the ${ctx.params.id} page.`;
+
+        main.innerHTML = '';
+        main.appendChild(elem);
+      });
+
+      router.route('/', (ctx) => {
+        let main = document.querySelector('main');
+
+        let elem = document.createElement('h1');
+        elem.textContent = 'Im the root page.';
+
+        main.innerHTML = '';
+        main.appendChild(elem);
+      });
+
+      router.enable(); 
+    </script>
+  </body>
+</html>
