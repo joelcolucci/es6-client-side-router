@@ -1,5 +1,5 @@
 # ROUTER
-> An ES6 client side router
+> An ES6 client-side router
 
 ## Installation
 ```
