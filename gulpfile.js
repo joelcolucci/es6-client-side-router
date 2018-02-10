@@ -5,23 +5,32 @@ const rollup = require('rollup');
 const uglify = require('rollup-plugin-uglify-es');
 
 
-gulp.task('js', function() {
-  return gulp.src([
-    './lib/*.js'
-  ])
-  .pipe(gulp.dest('./dist/'));
-});
-
-
-gulp.task('build', () => {
+gulp.task('build:es', () => {
   return rollup.rollup({
     input: './lib/router.js',
     plugins: [
-      uglify()
+      // uglify()
     ]
   }).then(bundle => {
     return bundle.write({
-      file: './dist/router.bundle.js',
+      file: './dist/router-es.js',
+      format: 'es',
+      name: 'Router',
+      sourcemap: true
+    });
+  });
+});
+
+
+gulp.task('build:umd', () => {
+  return rollup.rollup({
+    input: './lib/router.js',
+    plugins: [
+      // uglify()
+    ]
+  }).then(bundle => {
+    return bundle.write({
+      file: './dist/router-umd.js',
       format: 'umd',
       name: 'Router',
       sourcemap: true
@@ -31,19 +40,20 @@ gulp.task('build', () => {
 
 
 gulp.task('watch', function() {
-  gulp.watch('./lib/*.js', ['js', browserSync.reload]);
+  //TODO: runSequence
+  gulp.watch('./lib/*.js', ['build:es', browserSync.reload]);
 
   initBrowserSync('./demo');
 });
 
 
-gulp.task('demo', () => {
-  initBrowserSync('./demo');
+gulp.task('demo-es', () => {
+  initBrowserSync('./demo-es');
 });
 
 
-gulp.task('demo-bundle', () => {
-  initBrowserSync('./demo-bundle');
+gulp.task('demo-umd', () => {
+  initBrowserSync('./demo-umd');
 });
 
 
@@ -65,6 +75,6 @@ function initBrowserSync(baseDir) {
 
 
 gulp.task('default', [
-  'js',
-  'build'
+  'build:es',
+  'build:umd'
 ]);

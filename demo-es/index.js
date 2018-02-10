@@ -1,4 +1,4 @@
-import Router from '/assets/router.js';
+import Router from '/assets/router-es.js';
 
 
 let router = new Router();
