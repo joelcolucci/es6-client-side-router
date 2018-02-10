@@ -5,7 +5,7 @@
   "keywords": ["routing", "router", "es6", "browser"],
   "homepage": "https://github.com/joelcolucci/router",
   "bugs": "https://github.com/joelcolucci/router/issues",
-  "main": "lib/index.js",
+  "main": "./dist/router-es.js",
   "author": "Joel Colucci",
   "scripts": {
     "gulp": "./node_modules/gulp-cli/bin/gulp.js"
