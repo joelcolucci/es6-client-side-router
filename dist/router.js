@@ -46,50 +46,47 @@ export default class Router {
    *
    */
   _onClick(e) {
-    // Check if target element is a link or wrapped by a link
     let element = e.target;
 
+    // Check if click occurred on anchor element or
+    // on element wrapped by anchor element
+    let anchor;
     if (e.composedPath) {
-      // Browser supports composedPath therefore use it
-      // Works to walk nodes inside Shadow DOM and regular DOM
+      // If browser supports composedPath use it to crawl
+      // Preferred over parentNode as it works with Shadow DOM
+      // in addition to regular DOM
       let paths = e.composedPath();
       for (let i = 0, n = paths.length; i < n; i++) {
         let item = paths[i];
         if (item.tagName === 'A') {
-          element = item;
+          anchor = item;
           break;
-        } else {
-          element = null;
         }
       }
     } else {
       // Fallback to legacy parentNode crawl
-      while (!(element && element.matches('a'))) {
-        let parentNode = element.parentNode;
-        if (parentNode.nodeName === '#document') {
-          // Exit to avoid exception caused by invoking matches
-          // on document which does not have matches method
-          element = null;
+      while (element) {
+        if (element.tagName === 'A') {
+          anchor = element;
           break;
-        } else {
-          element = parentNode;
         }
+        // Iterate
+        element = element.parentNode;
       }
     }
 
-    if (!(element)) {
+    if (!(anchor)) {
+      // Click did NOT occur on an anchor we
+      // therefor do not intercept/alter it
       return;
     }
 
-    let href= element.getAttribute('href');
-
     let pageOrigin = location.origin;
     let pageHostname = location.hostname;
+    let href= anchor.getAttribute('href');
 
-    // Normalize href via URL API
-    let url = new URL(href, pageOrigin);
-  
-    // Validate if we want to intercept link click
+    let url = new URL(href, pageOrigin); // Normalize href via URL API
+    
     if (isDifferentDomain(url, pageHostname)) {
       return;
     }
@@ -98,16 +95,16 @@ export default class Router {
       return;
     }
 
-    if (element.getAttribute('target') === '_blank') {
+    if (anchor.hasAttribute('target')) {
       return;
     }
 
-    if (element.hasAttribute('download')) {
+    if (anchor.hasAttribute('download')) {
       return;
     }
 
-    // At this point we have verified the click was on a link
-    // and that link is a link we want to handle
+    // We have verified the click occurred on an anchor tag
+    // AND the link meets our criteria to intercept/handle
     e.preventDefault();
     this._handleRequest(url);
   }
