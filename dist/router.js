@@ -39,7 +39,7 @@ export default class Router {
    */
   _onPopState(e) {
     let url = location;
-    this.handleRoute(url.pathname);
+    this._handleRoute(url.pathname);
   }
 
   /**
@@ -77,7 +77,6 @@ export default class Router {
       }
     }
 
-
     if (!(element)) {
       return;
     }
@@ -110,23 +109,23 @@ export default class Router {
     // At this point we have verified the click was on a link
     // and that link is a link we want to handle
     e.preventDefault();
-    this.handleRequest(url);
+    this._handleRequest(url);
   }
 
   /**
    *
    */
-  handleRequest(url) {
+  _handleRequest(url) {
     let requestPath = url.pathname;
-    this.handleRoute(requestPath);
+    this._handleRoute(requestPath);
     this._setPushState(requestPath);
   }
 
   /**
    *
    */
-  handleRoute(requestPath) {
-    let route = this.getRoute(requestPath);
+  _handleRoute(requestPath) {
+    let route = this._getRoute(requestPath);
     if (!route) {
       console.log('[Router] 404 - No route matched path: ', requestPath);
       return;
@@ -140,9 +139,17 @@ export default class Router {
   }
 
   /**
+   *
+   */
+  _setPushState(pathname) {
+    let stateObject = {};
+    history.pushState(stateObject, '', pathname);   
+  }
+
+  /**
    * 
    */
-  getRoute(requestPath) {
+  _getRoute(requestPath) {
     let route;
     for (let [key, value] of this._routeMap) {
       route = value;
@@ -157,6 +164,7 @@ export default class Router {
     return route;
   }
 
+  /* Public API */
   /**
    *
    */
@@ -164,7 +172,7 @@ export default class Router {
     this._addEventListeners();
 
     let url = location;
-    this.handleRoute(url.pathname);
+    this._handleRoute(url.pathname);
   }
 
   /**
@@ -181,14 +189,5 @@ export default class Router {
     let route = new Route(pathPattern, callback);
 
     this._routeMap.set(route.regex, route);
-  }
-
-  /* Private methods */
-  /**
-   *
-   */
-  _setPushState(pathname) {
-    let stateObject = {};
-    history.pushState(stateObject, '', pathname);   
   }
 }
