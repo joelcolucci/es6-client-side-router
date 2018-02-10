@@ -30,7 +30,7 @@ A client-side routers primary responsbility is to:
 * Intercept navigation actions
 * Provide a hook to complete an alternative action
 
-#### What does this library define a navigation action?
+#### How does this library define a navigation action?
  This library defines a navigation action is:
 * A click on an anchor element*
 * Manipulation of browser history controls (Back, Forward button)
@@ -43,6 +43,10 @@ A client-side routers primary responsbility is to:
 * Anchor contains a "href" attribute
 * Anchor HREF is not to a different domain
 * Anchor HREF is not to an email address (mailto: link)
+
+##### URL bar changes
+URL changes in the URL bar trigger a popstate event. We catch this event
+and run the URL against the registered routes.
 
 ### Router Class
 
