@@ -24,8 +24,7 @@ yarn install
 yarn gulp demo
 ```
 
-## Documentation
-### Design Decisions
+## Design Decisions
 A client-side routers primary responsbility is to:
 * Intercept navigation actions
 * Provide a hook to complete an alternative action
@@ -48,6 +47,7 @@ A client-side routers primary responsbility is to:
 URL changes in the URL bar trigger a popstate event. We catch this event
 and run the URL against the registered routes.
 
+## Documentation
 ### Router Class
 
 #### router.route(path, callback)
