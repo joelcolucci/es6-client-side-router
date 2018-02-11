@@ -501,15 +501,15 @@ class Router {
    *
    */
   _handleRequest(url) {
-    let requestPath = url.pathname;
-    this._handleRoute(requestPath);
-    this._setPushState(requestPath);
+    this._handleRoute(url);
+    this._setPushState(url);
   }
 
   /**
    *
    */
-  _handleRoute(requestPath) {
+  _handleRoute(url) {
+    let requestPath = url.pathname;
     let route = this._getRoute(requestPath);
     if (!route) {
       console.log('[Router] 404 - No route matched path: ', requestPath);
@@ -517,9 +517,7 @@ class Router {
     }
 
     let ctx = {};
-    // TODO: Verify this is link we have clicked
-    // This looks like it's the current state which is incorrect
-    ctx.url = window.location;
+    ctx.url = url;
     ctx.params = route.parsePath(requestPath);
 
     route.callback.call({}, ctx);
@@ -528,7 +526,8 @@ class Router {
   /**
    *
    */
-  _setPushState(pathname) {
+  _setPushState(url) {
+    let pathname = url.pathname;
     let stateObject = {};
     history.pushState(stateObject, '', pathname);   
   }
