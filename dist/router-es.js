@@ -408,8 +408,8 @@ class Router {
    *
    */
   _onPopState(e) {
-    let url = location;
-    this._handleRoute(url.pathname);
+    let url = new URL(location);
+    this._handleRoute(url);
   }
 
   /**
