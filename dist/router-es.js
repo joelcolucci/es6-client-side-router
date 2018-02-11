@@ -557,7 +557,9 @@ class Router {
   enable() {
     this._addEventListeners();
 
-    let url = location;
+    // Create a URL instance from location since
+    // we use the URL API internally
+    let url = new URL(location.href);
     this._handleRoute(url);
   }
 
