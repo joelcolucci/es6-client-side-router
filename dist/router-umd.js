@@ -564,7 +564,7 @@ class Router {
     this._addEventListeners();
 
     let url = location;
-    this._handleRoute(url.pathname);
+    this._handleRoute(url);
   }
 
   /**
