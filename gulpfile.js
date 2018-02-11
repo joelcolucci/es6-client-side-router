@@ -43,7 +43,7 @@ gulp.task('watch', function() {
   //TODO: runSequence
   gulp.watch('./lib/*.js', ['build:es', browserSync.reload]);
 
-  initBrowserSync('./demo');
+  initBrowserSync('./demo-es');
 });
 
 
