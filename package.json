@@ -1,5 +1,5 @@
 {
-  "name": "router",
+  "name": "@joelcolucci/router",
   "version": "0.2.1",
   "description": "An ES6 client-side router",
   "keywords": ["routing", "router", "es6", "browser"],
