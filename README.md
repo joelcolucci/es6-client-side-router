@@ -29,12 +29,12 @@ A client-side routers primary responsbility is to:
 * Intercept navigation actions
 * Provide a hook to complete an alternative action
 
-#### How does this library define a navigation action?
+### How does this library define a navigation action?
  This library defines a navigation action is:
-* A click on an anchor element*
+* A click on an anchor element
 * Manipulation of browser history controls (Back, Forward button)
 
-##### *Clicks on anchor elements are filtered down by the following criteria:
+### Clicks on anchor elements are filtered down by the following criteria:
 * Click is not modified (Control + click)
 * Click is a left click
 * Anchor does not contain "target" attribute
@@ -44,7 +44,7 @@ A client-side routers primary responsbility is to:
 * Anchor HREF is not to a different domain
 * Anchor HREF is not to an email address (mailto: link)
 
-##### URL bar changes
+### URL bar changes
 URL changes in the URL bar trigger a popstate event. We catch this event
 and run the URL against the registered routes.
 
@@ -74,7 +74,7 @@ Check/run callback for given page path
 #### router.disable()
 Remove event listeners for `click` and `popstate`.
 
-#### Disabling route handling on specific Links
+### Disabling route handling on specific Links
 Route handling can be disabled on a per link basis by adding the attribute `data-router-ignore` to the anchor element.
 
 ```html
