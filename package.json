@@ -1,6 +1,6 @@
 {
   "name": "@joelcolucci/router",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "An ES6 client-side router",
   "keywords": ["routing", "router", "es6", "browser"],
   "homepage": "https://github.com/joelcolucci/router",
