@@ -468,6 +468,10 @@ class Router {
       return;
     }
 
+    if (anchor.hasAttribute('data-router-ignore')) {
+      return;
+    }
+
     if (!(anchor.hasAttribute('href'))) {
       return;
     }
