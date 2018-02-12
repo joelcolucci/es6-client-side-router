@@ -52,7 +52,7 @@ and run the URL against the registered routes.
 ### Router Class
 
 #### router.on(path, callback)
-Assign a callback for when the given path is matched.
+On URL match, run the given callback.
 
 ```javascript
 router.on('/widget/:widgetId', widget.view);
