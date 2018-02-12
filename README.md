@@ -74,8 +74,8 @@ Check/run callback for given page path
 Remove event listeners for `click` and `popstate`.
 
 ## Inspirations
-* Polymer's iron-location
-* Polymer's iron-route
-* VisionMedia PageJS
+* [Polymer's iron-location](https://github.com/PolymerElements/iron-location)
+* [Turbolinks](https://github.com/turbolinks/turbolinks)
+* [page.js](https://github.com/visionmedia/page.js)
 
 ## License
