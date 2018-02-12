@@ -10,8 +10,8 @@ Coming soon.
 ```javascript
 let router = new Router();
 
-router.route('/hello', (ctx) => {
-
+router.on('/hello', (ctx) => {
+  console.log('hello world');
 });
 
 router.enable();
@@ -51,11 +51,11 @@ and run the URL against the registered routes.
 ## Documentation
 ### Router Class
 
-#### router.route(path, callback)
-Register a callback for the given path.
+#### router.on(path, callback)
+Assign a callback for when the given path is matched.
 
 ```javascript
-router.route('/widget/:widgetId', widget.view);
+router.on('/widget/:widgetId', widget.view);
 ```
 
 The callback is invoked with one argument `ctx`.

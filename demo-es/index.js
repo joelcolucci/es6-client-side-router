@@ -4,7 +4,7 @@ import Router from '/assets/router-es.js';
 let router = new Router();
 
 
-router.route('/:id', (ctx) => {
+router.on('/:id', (ctx) => {
   let main = document.querySelector('main');
 
   let elem = document.createElement('h1');
@@ -15,7 +15,7 @@ router.route('/:id', (ctx) => {
 });
 
 
-router.route('/', (ctx) => {
+router.on('/', (ctx) => {
   let main = document.querySelector('main');
 
   let elem = document.createElement('h1');

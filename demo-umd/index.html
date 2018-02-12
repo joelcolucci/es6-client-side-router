@@ -34,7 +34,7 @@
     <script>
       let router = new window.Router();
 
-      router.route('/:id', (ctx) => {
+      router.on('/:id', (ctx) => {
         let main = document.querySelector('main');
 
         let elem = document.createElement('h1');
@@ -44,7 +44,7 @@
         main.appendChild(elem);
       });
 
-      router.route('/', (ctx) => {
+      router.on('/', (ctx) => {
         let main = document.querySelector('main');
 
         let elem = document.createElement('h1');

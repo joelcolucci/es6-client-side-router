@@ -577,7 +577,7 @@ class Router {
   /**
    *
    */
-  route(pathPattern, callback) {
+  on(pathPattern, callback) {
     let route = new Route(pathPattern, callback);
 
     this._routeMap.set(route.regex, route);
