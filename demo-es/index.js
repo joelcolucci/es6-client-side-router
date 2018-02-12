@@ -25,5 +25,8 @@ router.on('/', (ctx) => {
   main.appendChild(elem);
 });
 
+router.on('router-no-match', (ctx) => {
+  alert(`No route matched for ${ctx.url.href}`);
+})
 
 router.enable();

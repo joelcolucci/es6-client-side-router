@@ -63,8 +63,26 @@ The callback is invoked with one argument `ctx`.
 |  The ctx argument | |
 | ---------- | ------ |
 | ctx.params | URL parameter key/values |
-| ctx.url | Instance of URL class[See MDN URL API](https://developer.mozilla.org/en-US/docs/Web/API/URL) |
+| ctx.url | Instance of URL class ([See MDN URL API](https://developer.mozilla.org/en-US/docs/Web/API/URL)) |
 
+#### Handling routes that don't match
+If a user navigates to a route that does not match a special callback will be invoked.
+
+Developers can set this callback by:
+
+```javascript
+router.on('router-no-match', (ctx) => {
+  console.log('No route matched');
+});
+```
+
+We do not call this a "404" or "not found" on purpose.
+
+"404" and "not found" is terminology specific to HTTP.
+
+In our case, nomatch just means that no callback was found for the given route.
+
+No HTTP requests were involved.
 
 #### router.enable()
 Add event listeners for `click` and `popstate`.

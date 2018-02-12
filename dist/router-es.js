@@ -504,6 +504,14 @@ class Router {
   /**
    *
    */
+  _onNoMatch(url) {
+    let requestPath = url.pathname;
+    console.log('[Router] 404 - No route matched path: ', requestPath);
+  }
+
+  /**
+   *
+   */
   _handleRequest(url) {
     this._handleRoute(url);
     this._setPushState(url);
@@ -513,17 +521,17 @@ class Router {
    *
    */
   _handleRoute(url) {
+    let ctx = {};
+    ctx.url = url;
+
     let requestPath = url.pathname;
     let route = this._getRoute(requestPath);
     if (!route) {
-      console.log('[Router] 404 - No route matched path: ', requestPath);
+      this._onNoMatch.call({}, ctx);
       return;
     }
 
-    let ctx = {};
-    ctx.url = url;
     ctx.params = route.parsePath(requestPath);
-
     route.callback.call({}, ctx);
   }
 
@@ -578,8 +586,12 @@ class Router {
    *
    */
   on(pathPattern, callback) {
-    let route = new Route(pathPattern, callback);
+    if (pathPattern === 'router-no-match') {
+      this._onNoMatch = callback;
+      return;
+    }
 
+    let route = new Route(pathPattern, callback);
     this._routeMap.set(route.regex, route);
   }
 }
