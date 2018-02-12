@@ -533,9 +533,9 @@ class Router {
    *
    */
   _setPushState(url) {
-    let pathname = url.pathname;
+    let absoluteUrl = url.href;
     let stateObject = {};
-    history.pushState(stateObject, '', pathname);   
+    history.pushState(stateObject, '', absoluteUrl);   
   }
 
   /**
