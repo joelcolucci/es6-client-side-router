@@ -7,7 +7,7 @@
 npm install es6-client-side-router
 
 # Yarn
-yarnn add es6-client-side-router
+yarn add es6-client-side-router
 ```
 
 ## Getting Started
