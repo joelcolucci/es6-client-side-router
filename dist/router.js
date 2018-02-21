@@ -597,4 +597,4 @@ class Router {
 }
 
 export default Router;
-//# sourceMappingURL=router-es.js.map
+//# sourceMappingURL=router.js.map

@@ -1,4 +1,4 @@
-import Router from '/assets/router-es.js';
+import Router from '/assets/router.js';
 
 
 let router = new Router();
@@ -27,6 +27,7 @@ router.on('/', (ctx) => {
 
 router.on('router-no-match', (ctx) => {
   alert(`No route matched for ${ctx.url.href}`);
-})
+});
+
 
 router.enable();
