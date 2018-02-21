@@ -1,9 +1,13 @@
 # ES6 Client-side Router
-> An ES6 client-side router
+> A client-side router written as an ES6 module
 
 ## Installation
 ```
-Coming soon.
+# NPM
+npm install es6-client-side-router
+
+## Yarn
+yarnn add es6-client-side-router
 ```
 
 ## Getting Started
