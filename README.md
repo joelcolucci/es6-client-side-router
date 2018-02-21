@@ -2,11 +2,11 @@
 > A client-side router written as an ES6 module
 
 ## Installation
-```
+```shell
 # NPM
 npm install es6-client-side-router
 
-## Yarn
+# Yarn
 yarnn add es6-client-side-router
 ```
 
