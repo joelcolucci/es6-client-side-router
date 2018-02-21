@@ -1,4 +1,4 @@
-# ROUTER
+# ES6 Client-side Router
 > An ES6 client-side router
 
 ## Installation
@@ -8,6 +8,8 @@ Coming soon.
 
 ## Getting Started
 ```javascript
+import {Router} from 'es6-client-side-router';
+
 let router = new Router();
 
 router.on('/hello', (ctx) => {
@@ -17,40 +19,8 @@ router.on('/hello', (ctx) => {
 router.enable();
 ```
 
-## Demo
-```
-git clone https://github.com/joelcolucci/router
-yarn install
-yarn gulp demo
-```
-
-## Design Decisions
-A client-side routers primary responsbility is to:
-* Intercept navigation actions
-* Provide a hook to complete an alternative action
-
-### How does this library define a navigation action?
- This library defines a navigation action is:
-* A click on an anchor element
-* Manipulation of browser history controls (Back, Forward button)
-
-### Clicks on anchor elements are filtered down by the following criteria:
-* Click is not modified (Control + click)
-* Click is a left click
-* Anchor does not contain "target" attribute
-* Anchor does not contain "download" attribute
-* Anchor does not contain "data-router-ignore" attribute
-* Anchor contains a "href" attribute
-* Anchor HREF is not to a different domain
-* Anchor HREF is not to an email address (mailto: link)
-
-### URL bar changes
-URL changes in the URL bar trigger a popstate event. We catch this event
-and run the URL against the registered routes.
-
-## Documentation
+## API Reference
 ### Router Class
-
 #### router.on(path, callback)
 On URL match, run the given callback.
 
@@ -101,9 +71,37 @@ Route handling can be disabled on a per link basis by adding the attribute `data
 
 *Note this attribute is handled as a boolean. The value set does not matter. If it's present it will be considered true.*
 
-## Inspirations
+### Design Decisions
+A client-side routers primary responsbility is to:
+* Intercept navigation actions
+* Provide a hook to complete an alternative action
+
+#### How does this library define a navigation action?
+ This library defines a navigation action is:
+* A click on an anchor element
+* Manipulation of browser history controls (Back, Forward button)
+
+#### Clicks on anchor elements are filtered down by the following criteria:
+* Click is not modified (Control + click)
+* Click is a left click
+* Anchor does not contain "target" attribute
+* Anchor does not contain "download" attribute
+* Anchor does not contain "data-router-ignore" attribute
+* Anchor contains a "href" attribute
+* Anchor HREF is not to a different domain
+* Anchor HREF is not to an email address (mailto: link)
+
+#### URL bar changes
+URL changes in the URL bar trigger a popstate event. We catch this event
+and run the URL against the registered routes.
+
+## Contributing
+Coming soon..
+
+## Credit/Inspirations
 * [Polymer's iron-location](https://github.com/PolymerElements/iron-location)
 * [Turbolinks](https://github.com/turbolinks/turbolinks)
 * [page.js](https://github.com/visionmedia/page.js)
 
 ## License
+MIT (See LICENSE)
