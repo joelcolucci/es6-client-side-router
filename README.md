@@ -8,7 +8,8 @@ Coming soon.
 
 ## Getting Started
 ```javascript
-import {Router} from 'es6-client-side-router';
+import Router from 'es6-client-side-router';
+
 
 let router = new Router();
 
