@@ -50,6 +50,9 @@ router.on('/widget/:widgetId', (ctx) => {
 });
 ```
 
+##### `path` parameters
+The path parameter is converted a REGEX internally.
+
 ##### Callback function
 Callback functions are invoked with one argument `ctx`.
 
@@ -58,9 +61,20 @@ The following table describes the properties of the `ctx` argument.
 | Property | Description | Type |
 | -------- | ----------- | ---- |
 | ctx.params | URL parameter key/values | Object |
-| ctx.url | Instance of URL class*  | URL instance |
+| ctx.url | [Instance of the URL class](https://developer.mozilla.org/en-US/docs/Web/API/URL)  | URL instance |
 
-*[See MDN URL API](https://developer.mozilla.org/en-US/docs/Web/API/URL)
+##### Accessing query string values
+A URLs query string can be accessed through the URL class instance.
+
+View documentation: [MDN URL Search Params](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
+
+Example:
+```javascript
+router.on('/widget/:widgetId', (ctx) => {
+  ctx.url.href; // http://www.example.com/cats?type=tabby&color=gray
+  ctx.url.searchParams.toString(); // type=tabby&color=gray
+});
+```
 
 #### Handling 'no-match' routes
 We use the term 'no-match' to mean when a user navigates to a route that does 
@@ -92,17 +106,17 @@ Route handling can be disabled on a per link basis by adding the attribute `data
 
 *Note this attribute is handled as a boolean. The value set does not matter. If it's present it will be considered true.*
 
-### Design Decisions
+## Design Decisions
 A client-side routers primary responsbility is to:
 * Intercept navigation actions
 * Provide a hook to complete an alternative action
 
-#### What is a navigation action?
+### What is a navigation action?
  This library defines a navigation action is:
 * A click on an anchor element
 * Manipulation of browser history controls (Back, Forward button)
 
-#### Clicks on anchor elements are filtered down by the following criteria:
+### Clicks on anchor elements are filtered down by the following criteria:
 * Click is not modified (Control + click)
 * Click is a left click
 * Anchor does not contain "target" attribute
@@ -112,7 +126,7 @@ A client-side routers primary responsbility is to:
 * Anchor HREF is not to a different domain
 * Anchor HREF is not to an email address (mailto: link)
 
-#### URL bar changes
+### URL bar changes
 URL changes in the URL bar trigger a popstate event. We catch this event
 and run the URL against the registered routes.
 
