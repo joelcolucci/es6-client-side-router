@@ -25,49 +25,64 @@ router.enable();
 ```
 
 ## API Reference
-### Router Class
-#### router.on(path, callback)
-On URL match, run the given callback.
-
+### Router
+Create an instance of the Router class.
 ```javascript
-router.on('/widget/:widgetId', widget.view);
+import Router from 'es6-client-side-router';
+
+let router = new Router();
 ```
 
-The callback is invoked with one argument `ctx`.
+#### Methods
+#### router.on(path, callback)
+The following table describes the arguments required by the `on` method.
 
-|  The ctx argument | |
-| ---------- | ------ |
-| ctx.params | URL parameter key/values |
-| ctx.url | Instance of URL class ([See MDN URL API](https://developer.mozilla.org/en-US/docs/Web/API/URL)) |
+| Argument | Description | Type |
+| -------- | ----------- | ---- |
+| path | URL path to match | String |
+| callback | The function to execute when the path is matched | Function |
 
-#### Handling routes that don't match
-If a user navigates to a route that does not match a special callback will be invoked.
+Example:
 
-Developers can set this callback by:
+```javascript
+router.on('/widget/:widgetId', (ctx) => {
+  // TODO: fetch widget
+});
+```
 
+##### Callback function
+Callback functions are invoked with one argument `ctx`.
+
+The following table describes the properties of the `ctx` argument.
+| Property | Description | Type |
+| -------- | ----------- | ---- |
+| ctx.params | URL parameter key/values | Object |
+| ctx.url | Instance of URL class*  | URL instance |
+
+*[See MDN URL API](https://developer.mozilla.org/en-US/docs/Web/API/URL)
+
+#### Handling 'no-match' routes
+We use the term 'no-match' to mean when a user navigates to a route that does 
+not have a defined handler.
+
+When a 'no-match' occurs a default callback is invoked. The default callback will log the occurrence to the console.
+
+The default callback can be overwritten by the following:
 ```javascript
 router.on('router-no-match', (ctx) => {
   console.log('No route matched');
 });
 ```
 
-We do not call this a "404" or "not found" on purpose.
-
-"404" and "not found" is terminology specific to HTTP.
-
-In our case, nomatch just means that no callback was found for the given route.
-
-No HTTP requests were involved.
-
 #### router.enable()
-Add event listeners for `click` and `popstate`.
+Start listening and intercepting [navigation actions](#what-is-a-navigation-action).
 
-Check/run callback for given page path
+When router.enable() is called it will check the current URL and attempt to match/invoke the assigned callback.
 
 #### router.disable()
-Remove event listeners for `click` and `popstate`.
+Stop listening and intercepting [navigation actions](#what-is-a-navigation-action).
 
-### Disabling route handling on specific Links
+#### Disabling route handling on specific Links
 Route handling can be disabled on a per link basis by adding the attribute `data-router-ignore` to the anchor element.
 
 ```html
@@ -81,7 +96,7 @@ A client-side routers primary responsbility is to:
 * Intercept navigation actions
 * Provide a hook to complete an alternative action
 
-#### How does this library define a navigation action?
+#### What is a navigation action?
  This library defines a navigation action is:
 * A click on an anchor element
 * Manipulation of browser history controls (Back, Forward button)
