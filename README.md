@@ -39,19 +39,31 @@ The following table describes the arguments required by the `on` method.
 
 | Argument | Description | Type |
 | -------- | ----------- | ---- |
-| path | URL path to match | String |
+| path | A URL path/pattern to match | String |
 | callback | The function to execute when the path is matched | Function |
 
 Example:
 
 ```javascript
-router.on('/widget/:widgetId', (ctx) => {
-  // TODO: fetch widget
+router.on('/widgets', (ctx) => {
+  // fetch all widgets
 });
 ```
 
-##### `path` parameters
-The path parameter is converted a REGEX internally.
+##### path parsing
+The path parameter is converted to a REGEX internally using [path-to-regexp](https://github.com/pillarjs/path-to-regexp).
+
+When a path is matched:
+* The URL path is parsed using the internally stored REGEX
+* The parsed parameters are converted to an Object
+* The params Object is made available via `ctx.params`
+
+This allows for:
+```javascript
+router.on('/widgets/:widgetId', (ctx) => {
+  ctx.params.widgetId;
+});
+```
 
 ##### Callback function
 Callback functions are invoked with one argument `ctx`.
