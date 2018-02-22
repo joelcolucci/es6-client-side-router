@@ -54,6 +54,7 @@ router.on('/widget/:widgetId', (ctx) => {
 Callback functions are invoked with one argument `ctx`.
 
 The following table describes the properties of the `ctx` argument.
+
 | Property | Description | Type |
 | -------- | ----------- | ---- |
 | ctx.params | URL parameter key/values | Object |
